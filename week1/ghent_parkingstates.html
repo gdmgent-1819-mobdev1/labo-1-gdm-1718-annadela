@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+             #parkeerstatus{
+                display:flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                height:100vh;
+            }
+
+            .hoofdDiv{
+                width: 30%;
+                padding: 0 20px 0 20px;
+                border: solid 1px white;
+                border-radius: 10px;
+                box-shadow: 2px 2px 5px #B3F6B3;
+                height: 300px;
+            }
+
+            h1 {
+                font-size: 50px;
+                font-family: sans-serif;
+            };
+
+            .place {
+                background-color: white;
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <h1>parkeerstatus</h1>
+    <div id="parkeerstatus">
+    </div>
+    <script>
+        // functie expressie om JSON-request via url uit te voeren
+            const getJSON = function(url, callback) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.responseType = 'json';
+                xhr.onload = function() {
+                var status = xhr.status;
+                if (status === 200) {
+                    callback(null, xhr.response);
+                } else {
+                    callback(status, xhr.response);
+                }
+                };
+                xhr.send();
+            };
+                // get json data
+                getJSON('https://datatank.stad.gent/4/mobiliteit/bezettingparkingsrealtime.json', function(error, data) {
+                // show error
+                if(error) {  
+                    // do something here
+                    return false;
+                };
+                console.log(data);
+                for(i=0; i<data.length; i++){
+                let geg = data[i];
+                let domStructuur = document.getElementById('parkeerstatus');
+
+                let hoofdDiv = document.createElement('div');
+                hoofdDiv.className='hoofdDiv';
+                domStructuur.appendChild(hoofdDiv);
+
+                let over = geg.parkingStatus.availableCapacity;
+                let totaal = geg.parkingStatus.totalCapacity;
+                // let lijst = document.getElementsByClassName('hoofdDiv');
+                // for(j=0; j<lijst.length; j++){
+                    if((over/totaal)<0.2){
+                        hoofdDiv.style.background="#C48686"
+                    }else if((over/totaal)<=0.5){
+                        hoofdDiv.style.background="#F19675"
+                    }else if((over/totaal)>0.5){
+                        hoofdDiv.style.background="#B3F6B3"
+                    }
+                
+                
+
+                let place = document.createElement('h2');
+                place.innerHTML=geg.description;
+                place.className='place';
+                hoofdDiv.appendChild(place);
+
+                let firstSub = document.createElement('div');
+                firstSub.className="firstSub";
+                hoofdDiv.appendChild(firstSub);
+
+                let opening = document.createElement('h3');opening.innerHTML="Openingstijden";
+                firstSub.appendChild(opening);
+
+                let time = document.createElement('p');
+                time.innerHTML='vanaf '+ geg.openingTimes[0].from + ' tot ' + geg.openingTimes[0].to;
+                firstSub.appendChild(time);
+
+                let secSub = document.createElement('div');
+                secSub.className="secSub";
+                hoofdDiv.appendChild(secSub);
+
+                let status = document.createElement('h3');status.innerHTML="parkingstatus";
+                secSub.appendChild(status);
+
+
+                let available = document.createElement('p');
+                available.innerHTML="er zijn " + over + " plaatsen over van de " + totaal;
+                secSub.appendChild(available);
+                console.log(over);
+                console.log(totaal);
+                    
+                }
+                });
+    </script>
+</body>
+</html>

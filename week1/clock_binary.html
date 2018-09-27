@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>clock_binary</title>
+    <style>
+        body{
+            margin-left: 45%;
+        }
+        #dashboard{
+            width: 300px;
+            height: 300px;
+        }
+
+        .balk{
+            width: 250px;
+            height: 50px;
+            background-color: #E4E2E2;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .bol{
+            background-color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            box-shadow: 2px 2px 5px #454745;
+            
+        }
+
+        #clock{
+            color: gray;
+            font-size: 20px;
+            font-family: sans-serif;
+            margin-left: 80px;
+        }
+    </style>
+</head>
+<body>
+        <div id="clock"></div>
+        <div id="dashboard">
+            <div class="balk">
+                <div id="h1" class="bol"></div>
+                <div id="h2" class="bol"></div>
+                <div id="h3" class="bol"></div>
+                <div id="h4" class="bol"></div>
+                <div id="h5" class="bol"></div>
+                <div id="h6" class="bol"></div>
+            </div>
+            <div class="balk">
+                    <div id="m1" class="bol"></div>
+                    <div id="m2" class="bol"></div>
+                    <div id="m3" class="bol"></div>
+                    <div id="m4" class="bol"></div>
+                    <div id="m5" class="bol"></div>
+                    <div id="m6" class="bol"></div>
+            </div>
+            <div class="balk">
+                    <div id="s1" class="bol"></div>
+                    <div id="s2" class="bol"></div>
+                    <div id="s3" class="bol"></div>
+                    <div id="s4" class="bol"></div>
+                    <div id="s5" class="bol"></div>
+                    <div id="s6" class="bol"></div>
+            </div>
+        </div>
+        <script>
+            function digitalClock(){
+                let date = new Date()
+                let hours = date.getHours();
+                let minutes = date.getMinutes();
+                let seconds = date.getSeconds();
+    
+                if(hours == 0){
+                    h=12;
+                };
+    
+                let clock = `${hours} : ${minutes} : ${seconds}`;
+                // document.getElementById('clock').innerHTML = clock;
+                document.getElementById('clock').innerText = clock;
+                // document.getElementById('clock').textContent = clock;
+                
+                    let bol = document.getElementsByClassName("bol");
+                    for(i=0; i<bol.length; i++){
+                        bol[i].style.background='white';
+                    }
+                // UREN
+                    if(hours>32){
+                        document.getElementById('h1').style.background="#94DD94";
+                        hours= hours-32;
+                    };
+
+                    if(hours>=16){
+                        document.getElementById('h2').style.background="#94DD94";
+                        hours = hours -16
+                    };
+                    if(hours>=8){
+                        document.getElementById('h3').style.background="#94DD94";
+                        hours = hours -8;
+                    };
+                    if(hours>=4){
+                        document.getElementById('h4').style.background="#94DD94";
+                        hours = hours -4;
+                    };
+                    if(hours>=2){
+                        document.getElementById('h5').style.background="#94DD94"
+                        hours = hours -2;
+                    };
+                    if(hours>=1){
+                        document.getElementById('h6').style.background="#94DD94";
+                    }
+            
+                // MINUTEN
+                    if(minutes>32){
+                        document.getElementById('m1').style.background="#94DD94";
+                        minutes= minutes-32
+                    };
+
+                    if(minutes>=16){
+                        document.getElementById('m2').style.background="#94DD94";
+                        minutes = minutes -16
+                    };
+                    if(minutes>=8){
+                        document.getElementById('m3').style.background="#94DD94";
+                        minutes = minutes -8;
+                    };
+                    if(minutes>=4){
+                        document.getElementById('m4').style.background="#94DD94";
+                        minutes = minutes -4;
+                    };
+                    if(minutes>=2){
+                        document.getElementById('m5').style.background="#94DD94"
+                        minutes = minutes -2;
+                    };
+                    if(minutes>=1){
+                        document.getElementById('m6').style.background="#94DD94";
+                    }
+                // SECONDEN
+                    if(seconds>32){
+                        document.getElementById('s1').style.background="#94DD94".transitionDuration='1s';
+                        seconds= seconds-32
+                    };
+
+                    if(seconds>=16){
+                        document.getElementById('s2').style.background="#94DD94";
+                        seconds = seconds -16
+                    };
+                    if(seconds>=8){
+                        document.getElementById('s3').style.background="#94DD94";
+                        seconds = seconds -8;
+                    };
+                    if(seconds>=4){
+                        document.getElementById('s4').style.background="#94DD94";
+                        seconds = seconds -4;
+                    };
+                    if(seconds>=2){
+                        document.getElementById('s5').style.background="#94DD94"
+                        seconds = seconds -2;
+                    };
+                    if(seconds>=1){
+                        document.getElementById('s6').style.background="#94DD94";
+                    };
+                };
+            digitalClock();
+            setInterval(digitalClock, 1000);
+            
+
+            
+
+        </script>
+</body>
+</html>

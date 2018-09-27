@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style> 
+        .color{
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="hoofdDiv"></div>
+    <script>
+        let newDiv='';
+        let firstDiv= document.createElement('div');
+        for(let i=0; i<5;i++){
+            newDiv = document.createElement('div');
+            newDiv.className='newDiv';
+            for(let j=0; j<10; j++){
+                let num = Math.random();
+                if(num<0.5){
+                    let white = document.createElement('div');
+                    white.className="color";
+                    white.style.background= 'red';
+                }else{
+                    let black = document.createElement('div');
+                    black.className="color";
+                    black.style.background='black';
+                };
+                let hoofdDiv = document.getElementById('hoofdDiv');
+            hoofdDiv.appendChild(firstDiv);
+            firstDiv.appendChild(newDiv);
+            };
+            // let hoofdDiv = document.getElementById('hoofdDiv');
+            // hoofdDiv.appendChild(newDiv);
+            // hoofdDiv.appendChild(firstDiv);
+            
+            
+        };
+    </script>
+</body>
+</html>

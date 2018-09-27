@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>clock_analog</title>
+    <style>
+        html{
+            background-color: black;
+        }
+
+        #clock{
+            width: 600px;
+            height: 600px;
+            background-color: transparent;
+            border: 10px solid #E03838;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #sec-wijzer{
+            width: 1px;
+            height: 50%;
+            background-color: #E03838;
+            transform-origin: 50% 80%;
+            position: absolute;
+            top:10%;
+            left:50%;
+        }
+
+        #min-wijzer{
+            width: 3px;
+            height: 40%;
+            background-color: #E03838;
+            transform-origin: 50% 80%;
+            position: absolute;
+            top:18%;
+            left:50%;
+            margin-left: -1px;
+        }
+
+        #h-wijzer{
+            width: 5px;
+            height: 25%;
+            background-color: #E03838;
+            transform-origin: 50% 80%;
+            position: absolute;
+            top:30%;
+            left:50%;
+            margin-left: -2px;
+        }
+
+        .num{
+            height: 100%;
+            position: absolute;
+            left: calc(50% - 0.5em);
+        }
+
+        .num div{
+            width:1em;
+            line-height: 2em;
+            color: brown;
+            text-align: center;
+            vertical-align: middle;
+        }
+        /* CIJFERS CLOK */
+            .num1{
+                transform: rotate(30deg);
+            }
+
+            .num1 div{
+                transform: rotate(-30deg);
+            }
+
+            .num2{
+                transform: rotate(60deg);
+            }
+
+            .num2 div{
+                transform: rotate(-60deg);
+            }
+
+            .num3{
+                transform: rotate(90deg);
+            }
+
+            .num3 div{
+                transform: rotate(-90deg);
+            }
+
+            .num4{
+                transform: rotate(120deg);
+            }
+
+            .num4 div{
+                transform: rotate(-120deg);
+            }
+
+            .num5{
+                transform: rotate(150deg);
+            }
+
+            .num5 div{
+                transform: rotate(-150deg);
+            }
+
+            .num6{
+                transform: rotate(180deg);
+            }
+
+            .num6 div{
+                transform: rotate(-180deg);
+            }
+
+            .num7{
+                transform: rotate(-150deg);
+            }
+
+            .num7 div{
+                transform: rotate(150deg);
+            }
+
+            .num8{
+                transform: rotate(-120deg);
+            }
+
+            .num8 div{
+                transform: rotate(120deg);
+            }
+
+            .num9{
+                transform: rotate(-90deg);
+            }
+
+            .num9 div{
+                transform: rotate(90deg);
+            }
+
+            .num10{
+                transform: rotate(-60deg);
+            }
+
+            .num10 div{
+                transform: rotate(60deg);
+            }
+
+            .num11{
+                transform: rotate(-30deg);
+            }
+
+            .num11 div{
+                transform: rotate(30deg);
+            }
+    </style>
+</head>
+<body>
+    <div id="time"></div><br>
+    <div id="clock">
+        <div class= 'num num1'><div>1</div></div>
+        <div class= 'num num2'><div>2</div></div>
+        <div class= 'num num3'><div>3</div></div>
+        <div class= 'num num4'><div>4</div></div>
+        <div class= 'num num5'><div>5</div></div>
+        <div class= 'num num6'><div>6</div></div>
+        <div class= 'num num7'><div>7</div></div>
+        <div class= 'num num8'><div>8</div></div>
+        <div class= 'num num9'><div>9</div></div>
+        <div class= 'num num10'><div>10</div></div>
+        <div class= 'num num11'><div>11</div></div>
+        <div class= 'num num12'><div>12</div></div>
+        <div id="h-wijzer"></div>
+        <div id="min-wijzer"></div>
+        <div id="sec-wijzer"></div>
+
+    </div>
+    <script>       
+        setInterval(function(){
+            let date = new Date();
+            updateTime(date);
+            updateClock(date);
+        },1000);
+
+        
+        function updateClock(date){
+            let secWijzer = document.getElementById('sec-wijzer').style;
+            let minWijzer = document.getElementById('min-wijzer').style;
+            let hWijzer = document.getElementById('h-wijzer').style;
+
+            secWijzer.transform="rotate(" + date.getSeconds() *6 + 'deg)';
+            minWijzer.transform="rotate(" + date.getMinutes() *6 + 'deg)';
+            hWijzer.transform="rotate(" + date.getHours() * 30 + date.getMinutes() * 0.5 + 'deg)';
+        }
+
+        function updateTime(date){
+            let timeDiv = document.getElementById('time');
+            let time = "Time: " + date.getHours()+ " : " + date.getMinutes() + " : " + date.getSeconds();
+            timeDiv.innerHTML= time;
+        }
+    </script>
+</body>
+</html>
